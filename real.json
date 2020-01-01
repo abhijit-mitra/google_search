@@ -1,0 +1,7 @@
+{
+  "task": "yelp-clone",
+  "stack": {
+    "type": "nodejs"
+  },
+  "template": "default"
+}
