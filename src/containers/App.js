@@ -1,18 +1,39 @@
-import React from "react";
+import React, { PureComponent } from 'react';
 
-import ListView from "../components/ListView/ListView";
-import MapView from "../components/MapView/MapView";
+import {LeftPane, RightPane, SearchItem} from "../components/organisms";
+import {SearchAPI} from '../apis';
 import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <div className="col-md-12">
-          <ListView />
+class App extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data:[]
+    };
+  }
+  componentDidMount = async ()=>{
+    const res = await SearchAPI.getSearchResult('term=restaurants&location=NYC');
+    const data = await res.json();
+    this.setState({
+      data: data.businesses
+    })
+  }
+  render() {
+    const {data} = this.state;
+    return (
+      <div className="App p-30">
+        <div className="row">
+          <LeftPane>
+            {Boolean(data.length) && data.map((elm)=>(<SearchItem data={elm} key={elm.id}/>))}
+          </LeftPane>
+          <RightPane>
+            <h1>Hi2</h1>
+          </RightPane>
+        </div>
       </div>
-      <MapView />
-    </div>
-  );
+    );
+  }
+
 }
 
 export default App;

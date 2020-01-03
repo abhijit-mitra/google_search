@@ -1,0 +1,11 @@
+.search-item{
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin: 15px 0;
+}
+.search-item img{
+  width: 100%;
+  height: 160px;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
